@@ -24,7 +24,7 @@
         <br/>
         <div class="scenario-objectives">In this hands-on lab, you learned about:</div>
         <ul>
-              <li><span class="scenario-objective">Preparing a Cassandra 3.x node for upgrade</span></li>
+              <li><span class="scenario-objective">Preparing a Cassandra 3.x node for migration</span></li>
               <li><span class="scenario-objective">Installing Cassandra 4.x</span></li>
               <li><span class="scenario-objective">Migrating a node from Cassandra 3.x to 4.x</span></li>
         </ul>

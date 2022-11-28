@@ -20,7 +20,7 @@
 
 <!-- CONTENT -->
 
-<div class="step-title">Configure audit logging</div>
+<div class="step-title">Verify that the node is ready to be upgraded</div>
 
 In this step, you will look at some of the configurable properties of audit logging. Then, you will demonstrate setting and unsetting one of these properties.
 

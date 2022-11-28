@@ -20,7 +20,7 @@
 
 <!-- CONTENT -->
 
-<div class="step-title">Enable audit logging in cassandra.yaml</div>
+<div class="step-title">Prepare the node for migration</div>
 
 Previously, you enabled audit logging for a Cassandra node using `nodetool`, but the logging will not remain enabled when the node is restarted unless you edit the `cassandra.yaml` file. In this step, you will learn how to audit logging in `cassandra.yaml`. 
 

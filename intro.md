@@ -20,12 +20,12 @@
             </ul>
             <div class="scenario-objectives">In this hands-on lab, you will:</div>
             <ul>
-              <li><span class="scenario-objective">Configure a single node Cassandra 3.x cluster</span></li>
-              <li><span class="scenario-objective">Populate this cluster with data</span></li>
-              <li><span class="scenario-objective">Prepare the cluster for upgrade</span></li>
+              <li><span class="scenario-objective">Start a single-node Cassandra 3.x cluster</span></li>
+              <li><span class="scenario-objective">Create schema and insert data</span></li>
+              <li><span class="scenario-objective">Prepare the node for migration</span></li>
               <li><span class="scenario-objective">Install Cassandra 4.x</span></li>
-              <li><span class="scenario-objective">Start Cassandra 4.x cluster</span></li>
-              <li><span class="scenario-objective">Verify that the data has upgraded to the Cassandra 4.x cluster</span></li>
+              <li><span class="scenario-objective">Start Cassandra 4.x</span></li>
+              <li><span class="scenario-objective">Verify that the node has been successfully migrated</span></li>
             </ul>
       </div>
      </div>

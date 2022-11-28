@@ -20,7 +20,7 @@
 
 <!-- CONTENT -->
 
-<div class="step-title">Create keyspace and table</div>
+<div class="step-title">Verify that a Cassandra 3.x node is running</div>
 
 In this step, you will connect to Cassandra using `cqlsh`, and create a keyspace and table.
 

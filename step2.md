@@ -20,7 +20,7 @@
 
 <!-- CONTENT -->
 
-<div class="step-title">Enable audit logging via nodetool</div>
+<div class="step-title">Create a keyspace and table, and insert data</div>
 
 In this step, you will use `nodetool` to dynamically enable and disable audit logging. Next, you will insert and update some data. Finally, you will view the audit log.
 
