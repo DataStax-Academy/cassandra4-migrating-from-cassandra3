@@ -1,4 +1,4 @@
-# Audit Logging
+# Migrating from Cassandra 3.x to 4.x
 
 ## Learn how to upgrade an Apache Cassandra® cluster from 3.x to 4.x.
 
