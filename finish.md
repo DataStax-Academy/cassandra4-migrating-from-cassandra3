@@ -24,9 +24,9 @@
         <br/>
         <div class="scenario-objectives">In this hands-on lab, you learned about:</div>
         <ul>
-              <li><span class="scenario-objective">Enabling and disabling audit logging using <code>nodetool</code></span></li>
-              <li><span class="scenario-objective">Enabling and disabling audit logging in <code>cassandra.yaml</code></span></li>
-              <li><span class="scenario-objective">Configuring logging properties</span></li>
+              <li><span class="scenario-objective">Preparing a Cassandra 3.x node for upgrade</span></li>
+              <li><span class="scenario-objective">Installing Cassandra 4.x</span></li>
+              <li><span class="scenario-objective">Migrating a node from Cassandra 3.x to 4.x</span></li>
         </ul>
         <div class="resources">Learn more about Cassandra on <a href="https://datastax.com/dev" target="_blank">datastax.com/dev</a>:</div>
         <ul>
