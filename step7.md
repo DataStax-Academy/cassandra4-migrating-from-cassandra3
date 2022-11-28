@@ -9,10 +9,10 @@
 
 <!-- NAVIGATION -->
 <div id="navigation-top" class="navigation-top">
- <a href='command:katapod.loadPage?[{"step":"step3"}]'
+ <a href='command:katapod.loadPage?[{"step":"step6"}]'
    class="btn btn-dark navigation-top-left">⬅️ Back
  </a>
-<span class="step-count"> Step 4 of 4</span>
+<span class="step-count"> Step 7 of 7</span>
  <a href='command:katapod.loadPage?[{"step":"finish"}]' 
     class="btn btn-dark navigation-top-right">Next ➡️
   </a>
@@ -59,7 +59,7 @@ In this step, you learned how to enable audit logging in the `cassandra.yaml` fi
 
 <!-- NAVIGATION -->
 <div id="navigation-bottom" class="navigation-bottom">
- <a href='command:katapod.loadPage?[{"step":"step3"}]'
+ <a href='command:katapod.loadPage?[{"step":"step6"}]'
    class="btn btn-dark navigation-bottom-left">⬅️ Back
  </a>
  <a href='command:katapod.loadPage?[{"step":"finish"}]'
