@@ -13,16 +13,19 @@
     <div class="container px-4 py-2">
      <div class="row g-4 py-2 row-cols-1 row-cols-lg-1">
       <div class="feature col div-choice">
-            <div class="scenario-description">Learn how to use audit logging in Apache Cassandra®.</div>
+            <div class="scenario-description">Learn how to upgrade an Apache Cassandra® cluster from 3.x to 4.x.</div>
             <ul>
-              <li><span class="scenario-description-attribute">Difficulty</span>: Easy</li>
-              <li><span class="scenario-description-attribute">Time</span>: 15 minutes</li>
+              <li><span class="scenario-description-attribute">Difficulty</span>: Intermediate</li>
+              <li><span class="scenario-description-attribute">Time</span>: 20 minutes</li>
             </ul>
             <div class="scenario-objectives">In this hands-on lab, you will:</div>
             <ul>
-              <li><span class="scenario-objective">Dynamically enable and disable audit logging using <code>nodetool</code></span></li>
-              <li><span class="scenario-objective">Statically enable and disable audit logging in <code>cassandra.yaml</code></span></li>
-              <li><span class="scenario-objective">Configure logging properties</span></li>
+              <li><span class="scenario-objective">Configure a single node Cassandra 3.x cluster</span></li>
+              <li><span class="scenario-objective">Populate this cluster with data</span></li>
+              <li><span class="scenario-objective">Prepare the cluster for upgrade</span></li>
+              <li><span class="scenario-objective">Install Cassandra 4.x</span></li>
+              <li><span class="scenario-objective">Start Cassandra 4.x cluster</span></li>
+              <li><span class="scenario-objective">Verify that the data has upgraded to the Cassandra 4.x cluster</span></li>
             </ul>
       </div>
      </div>
