@@ -29,7 +29,6 @@ The script running in the background is installing JDK 8 and Cassandra 3.x. It c
 
 Once *Cassandra 3.x successfully started*, execute the following commands.
 
-
 ✅ Verify that the Cassandra version is 3.x:
 ```
 nodetool version
