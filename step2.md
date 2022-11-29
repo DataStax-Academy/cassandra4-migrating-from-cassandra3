@@ -29,7 +29,7 @@ In this step, you will create a keyspace and table, and populate them with some 
 cqlsh
 ```
 
-Create the keyspace:
+✅ Create the keyspace:
 ```
 CREATE KEYSPACE united_states 
 WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
@@ -37,7 +37,7 @@ WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
 USE united_states;
 ```
 
-Create the table:
+✅ Create the table:
 ```
 CREATE TABLE cities_by_state (
     state text,
@@ -47,7 +47,7 @@ CREATE TABLE cities_by_state (
 );
 ```
 
-Insert the top 10 largest U.S. cities by population:
+✅ Insert the top 10 largest U.S. cities by population:
 ```
 INSERT INTO cities_by_state (state, name, population) 
   VALUES ('New York','New York City',8622357);
@@ -71,17 +71,17 @@ INSERT INTO cities_by_state (state, name, population)
   VALUES ('California','San Jose',1036242);
 ```
 
-Verify that the data has been loaded:
+✅ Verify that the data has been loaded:
 ```
 SELECT * FROM cities_by_state;
 ```
 
-Retrieve all the cities in California:
+✅ Retrieve all the cities in California:
 ```
 SELECT * FROM cities_by_state WHERE state = 'California';
 ```
 
-Exit the CQL shell and clear the screen:
+✅ Exit the CQL shell and clear the screen:
 ```
 exit
 clear
