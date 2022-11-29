@@ -7,16 +7,16 @@ tasks:
       printf 'export PATH="$HOME%s:$PATH"\n' "/apache-cassandra/bin" >> $HOME/.bashrc
       printf 'export PATH="$HOME%s:$PATH"\n' "/apache-cassandra/tools/bin" >> $HOME/.bashrc
     init: |
+      sdk install java 8.0.345.fx-zulu
+      wget https://archive.apache.org/dist/cassandra/3.11.9/apache-cassandra-3.11.9-bin.tar.gz
       wget https://archive.apache.org/dist/cassandra/4.0.5/apache-cassandra-4.0.5-bin.tar.gz
       pip install -U cqlsh
     command: | 
-      tar -xzf apache-cassandra-4.0.5-bin.tar.gz
-      rm apache-cassandra-4.0.5-bin.tar.gz
-      mv apache-cassandra-4.0.5 $HOME/apache-cassandra
-      mv config/cassandra-rackdc.properties $HOME/apache-cassandra/conf/cassandra-rackdc.properties
-      mv config/cassandra.yaml $HOME/apache-cassandra/conf/cassandra.yaml      
+      tar -xzf apache-cassandra-3.11.9-bin.tar.gz
+      rm apache-cassandra-3.11.9-bin.tar.gz
+      mv apache-cassandra-3.11.9 ~/cassandra3
       source /home/gitpod/.astra/cli/astra-init.sh
-      $HOME/apache-cassandra/bin/cassandra
+      ~/cassandra3/bin/cassandra
 ports:
   - port: 9042
     onOpen: ignore
