@@ -6,17 +6,17 @@ tasks:
       curl -Ls "https://dtsx.io/get-astra-cli" | bash >> ./install.log
       printf 'export PATH="$HOME%s:$PATH"\n' "/apache-cassandra/bin" >> $HOME/.bashrc
       printf 'export PATH="$HOME%s:$PATH"\n' "/apache-cassandra/tools/bin" >> $HOME/.bashrc
-    init: |
       sdk install java 8.0.345.fx-zulu
+    init: |  
       wget https://archive.apache.org/dist/cassandra/3.11.9/apache-cassandra-3.11.9-bin.tar.gz
       wget https://archive.apache.org/dist/cassandra/4.0.5/apache-cassandra-4.0.5-bin.tar.gz
       pip install -U cqlsh
     command: | 
       tar -xzf apache-cassandra-3.11.9-bin.tar.gz
       rm apache-cassandra-3.11.9-bin.tar.gz
-      mv apache-cassandra-3.11.9 ~/cassandra3
+      mv apache-cassandra-3.11.9 cassandra3
       source /home/gitpod/.astra/cli/astra-init.sh
-      ~/cassandra3/bin/cassandra
+      cassandra3/bin/cassandra
 ports:
   - port: 9042
     onOpen: ignore
