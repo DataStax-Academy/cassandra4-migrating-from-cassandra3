@@ -22,40 +22,37 @@
 
 <div class="step-title">Install Cassandra 4.x</div>
 
-Previously, you enabled audit logging for a Cassandra node using `nodetool`, but the logging will not remain enabled when the node is restarted unless you edit the `cassandra.yaml` file. In this step, you will learn how to audit logging in `cassandra.yaml`. 
+✅ In this step, you will dowanload and unpack the Cassandra 4.0.0 distribution.
 
-✅ Open the `cassandra.yaml` file in the editor:
+Download the tarball.
 ```
-nano $HOME/apache-cassandra/conf/cassandra.yaml
+wget https://archive.apache.org/dist/cassandra/4.0.0/apache-cassandra-4.0.0-bin.tar.gz
 ```
 
-✅ Find the line that contains `audit_logging_options:` and change `enabled` from `false` to `true`. Your edited file may look like this:
+Extract Cassandra.
+```
+tar xzf apache-cassandra-4.0.0-bin.tar.gz
+```
 
-<pre class="non-executable-code">
-audit_logging_options:
-    enabled: true
-    logger:
-      - class_name: BinAuditLogger
-    # audit_logs_dir:
-    # included_keyspaces:
-    # excluded_keyspaces: system, system_schema, system_virtual_schema
-    # included_categories:
-    # excluded_categories:
-    # included_users:
-    # excluded_users:
-    # roll_cycle: HOURLY
-    # block: true
-    # max_queue_weight: 268435456 # 256 MiB
-    # max_log_size: 17179869184 # 16 GiB
-    ## archive command is "/path/to/script.sh %path" where %path is replaced with the file being rolled:
-    # archive_command:
-    # max_archive_retries: 10
-</pre>
+Move the Cassandra folder.
+```
+mv apache-cassandra-4.0.0 /usr/share/cassandra4
+```
 
-For the new configuration settings in `cassandra.yaml` to take effect, you will need to save the file and restart Cassandra.
+Delete the archive.
+```
+rm apache-cassandra-4.0.0-bin.tar.gz
+```
 
-In this step, you learned how to enable audit logging in the `cassandra.yaml` file. 
+Update the PATH variable.
+```
+export PATH="/usr/bin:/usr/share/cassandra4/bin:/usr/share/cassandra4/tools/bin:$PATH"
+```
 
+Clear the screen and continue.
+```
+clear
+```
 
 <!-- NAVIGATION -->
 <div id="navigation-bottom" class="navigation-bottom">

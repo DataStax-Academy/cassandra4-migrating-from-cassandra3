@@ -51,7 +51,7 @@ nodetool gossipinfo | grep STATUS | grep -v NORMAL
 ```
 
 **Dropped Messages**
-✅ Establish that no Dropped Message log messages have been recorded on any node in the previous 72 hours.
+✅ Establish that no Dropped Message log messages have been recorded on any node in the previous 72 hours:
 ```
 nodetool tpstats | grep -A 12 Dropped
 ```

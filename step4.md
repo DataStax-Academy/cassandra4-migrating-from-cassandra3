@@ -24,17 +24,17 @@
 
 In this step, we will prepare the Cassandra 3.x cluster for the upgrade.
 
-Take a snapshot of the node in case you need to roll back the upgrade (`nodetool snapshot` also flushes the memtables to disk):
+✅ Take a snapshot of the node in case you need to roll back the upgrade (`nodetool snapshot` also flushes the memtables to disk):
 ```
 nodetool snapshot
 ```
 
-Stop the node by finding the PID and calling `kill`:
+✅ Stop the node by finding the PID and calling `kill`:
 ```
 pgrep -u root -f cassandra | xargs kill -9
 ```
 
-Use `nodetool` to verify that the server has been shut down:
+✅ Use `nodetool` to verify that the server has been shut down:
 ```
 nodetool status
 ```
