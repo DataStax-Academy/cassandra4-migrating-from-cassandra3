@@ -22,40 +22,30 @@
 
 <div class="step-title">Start Cassandra 4.x</div>
 
-Previously, you enabled audit logging for a Cassandra node using `nodetool`, but the logging will not remain enabled when the node is restarted unless you edit the `cassandra.yaml` file. In this step, you will learn how to audit logging in `cassandra.yaml`. 
+In this step, you will configure `cassandra.yaml` and start Cassandra 4.x.
 
-✅ Open the `cassandra.yaml` file in the editor:
+✅ Use `sed` to modify the number of virtual nodes in the server. The 3.x cluster had 256 and the 4.x cluster is set to 16 by default. Set `num_tokens` to 256 in Cassandra 4.x:
 ```
-nano $HOME/apache-cassandra/conf/cassandra.yaml
+sed -i 's/num_tokens: 16/num_tokens: 256/' cassandra4/conf/cassandra.yaml
 ```
 
-✅ Find the line that contains `audit_logging_options:` and change `enabled` from `false` to `true`. Your edited file may look like this:
+✅ Point the Cassandra 4.x node to the Cassandra 3.x node data files:
+```
+sed -i 's/# data_file_directories:/data_file_directories:/' cassandra4/conf/cassandra.yaml
+sed -i 's/#     - \/var\/lib\/cassandra\/data/    - \/usr\/share\/cassandra\/data\/data/' cassandra4/conf/cassandra.yaml
+```
 
-<pre class="non-executable-code">
-audit_logging_options:
-    enabled: true
-    logger:
-      - class_name: BinAuditLogger
-    # audit_logs_dir:
-    # included_keyspaces:
-    # excluded_keyspaces: system, system_schema, system_virtual_schema
-    # included_categories:
-    # excluded_categories:
-    # included_users:
-    # excluded_users:
-    # roll_cycle: HOURLY
-    # block: true
-    # max_queue_weight: 268435456 # 256 MiB
-    # max_log_size: 17179869184 # 16 GiB
-    ## archive command is "/path/to/script.sh %path" where %path is replaced with the file being rolled:
-    # archive_command:
-    # max_archive_retries: 10
-</pre>
+✅ Start the Cassandra 4.x node:
+```
+cassandra
+```
 
-For the new configuration settings in `cassandra.yaml` to take effect, you will need to save the file and restart Cassandra.
+Look for the *state jump to NORMAL* message to indicate that the server is running.
 
-In this step, you learned how to enable audit logging in the `cassandra.yaml` file. 
-
+✅ Clear the screen and continue:
+```
+clear
+```
 
 <!-- NAVIGATION -->
 <div id="navigation-bottom" class="navigation-bottom">

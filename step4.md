@@ -31,7 +31,7 @@ nodetool snapshot
 
 ✅ Stop the node by finding the PID and calling `kill`:
 ```
-pgrep -u root -f cassandra | xargs kill -9
+pgrep -u gitpod -f cassandra | xargs kill -9
 ```
 
 ✅ Use `nodetool` to verify that the server has been shut down:
