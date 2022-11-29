@@ -22,79 +22,72 @@
 
 <div class="step-title">Create a keyspace and table, and insert data</div>
 
-In this step, you will use `nodetool` to dynamically enable and disable audit logging. Next, you will insert and update some data. Finally, you will view the audit log.
-
-✅ Use `nodetool` to enable audit logging:
-```
-nodetool enableauditlog
-```
+In this step, you will create a keyspace and table, and populate them with some data.
 
 ✅ Start the CQL shell:
 ```
-cqlsh -k ks_audit_logging
+cqlsh
 ```
 
-✅ Insert a row into the `songs` table:
+Create the keyspace:
 ```
-INSERT INTO songs (artist, title, year) VALUES ('Elton John', 'Daniel', 1974);
+CREATE KEYSPACE united_states 
+WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+
+USE united_states;
 ```
 
-✅ Wait a minute! Elton John released *Daniel* in 1973 on the album *Don't Shoot Me I'm Only The Piano Player*!
-Update the row to reflect the correct year:
+Create the table:
 ```
-UPDATE songs SET year = 1973 WHERE artist = 'Elton John' AND title = 'Daniel';
+CREATE TABLE cities_by_state (
+    state text,
+    name text,
+    population int,
+    PRIMARY KEY ((state), name)
+);
 ```
 
-✅ Make sure the update worked:
+Insert the top 10 largest U.S. cities by population:
 ```
-SELECT * FROM songs WHERE artist = 'Elton John' AND title = 'Daniel';
+INSERT INTO cities_by_state (state, name, population) 
+  VALUES ('New York','New York City',8622357);
+INSERT INTO cities_by_state (state, name, population) 
+  VALUES ('California','Los Angeles',4085014);
+INSERT INTO cities_by_state (state, name, population) 
+  VALUES ('Illinois','Chicago',2670406);
+INSERT INTO cities_by_state (state, name, population) 
+  VALUES ('Texas','Houston',2378146);
+INSERT INTO cities_by_state (state, name, population) 
+  VALUES ('Arizona','Phoenix',1743469);
+INSERT INTO cities_by_state (state, name, population) 
+  VALUES ('Pennsylvania','Philadelphia',1590402);
+INSERT INTO cities_by_state (state, name, population) 
+  VALUES ('Texas','San Antonio',1579504);
+INSERT INTO cities_by_state (state, name, population) 
+  VALUES ('California','San Diego',1469490);
+INSERT INTO cities_by_state (state, name, population) 
+  VALUES ('Texas','Dallas',1400337);
+INSERT INTO cities_by_state (state, name, population) 
+  VALUES ('California','San Jose',1036242);
 ```
 
-You should see *Daniel* with the correct year - 1973.
+Verify that the data has been loaded:
+```
+SELECT * FROM cities_by_state;
+```
 
-✅ Exit the CQL shell:
+Retrieve all the cities in California:
+```
+SELECT * FROM cities_by_state WHERE state = 'California';
+```
+
+Exit the CQL shell and clear the screen:
 ```
 exit
+clear
 ```
 
-✅ The audit log is stored in binary format so you will use `auditlogviewer` to see it in *human-readable* form:
-```
-auditlogviewer $HOME/apache-cassandra/logs/audit/
-```
-
-Ignore any Java warnings you may see. The log output should contain the `INSERT`, `UPDATE` and `SELECT` commands you entered along with a timestamp, username and more.
-
-Audit logs will often contain sensitive data (account numbers, employee names, etc.). Therefore, the files (and the directories that contain them) should be protected using the host operating system's file system protections. Since the default audit logger implementaion does not give the option to redact specific fields, sensitive data should be masked or removed before sharing.
-
-✅ Use `nodetool` to disable audit logging:
-```
-nodetool disableauditlog
-```
-
-✅ Start the CQL shell:
-```
-cqlsh -k ks_audit_logging
-```
-
-✅ Insert two more songs into the `songs` table:
-```
-INSERT INTO songs (artist, title, year) VALUES ('Elton John', 'Bennie and the Jets', 1973);
-INSERT INTO songs (artist, title, year) VALUES ('Steve Miller Band', 'The Joker', 1974);
-```
-
-✅ Exit the CQL shell:
-```
-exit
-```
-
-✅ Take another look at the audit log:
-```
-auditlogviewer $HOME/apache-cassandra/logs/audit/
-```
-
-Since we disabled audit logging, the most recent inserts are not reflected in the logs.
-
-In this step, you used `nodetool` to enable and disable logging. You also used `auditlogviewer` to view the audit logs.
+You have loaded the data, continue to the next step.
 
 <!-- NAVIGATION -->
 <div id="navigation-bottom" class="navigation-bottom">
