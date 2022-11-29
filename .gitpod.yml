@@ -4,12 +4,11 @@ tasks:
       printf 'export PATH="$HOME%s:$PATH"\n' "/.astra/cli" >> $HOME/.bashrc
       printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
       curl -Ls "https://dtsx.io/get-astra-cli" | bash >> ./install.log
-      printf 'export PATH="$HOME%s:$PATH"\n' "/apache-cassandra/bin" >> $HOME/.bashrc
-      printf 'export PATH="$HOME%s:$PATH"\n' "/apache-cassandra/tools/bin" >> $HOME/.bashrc
+      printf 'export PATH="$GITPOD_REPO_ROOT%s:$PATH"\n' "/cassandra3/bin" >> $HOME/.bashrc
+      printf 'export PATH="$GITPOD_REPO_ROOT%s:$PATH"\n' "/cassandra3/tools/bin" >> $HOME/.bashrc
     init: |  
       yes | sdk install java 8.0.345.fx-zulu
       wget https://archive.apache.org/dist/cassandra/3.11.9/apache-cassandra-3.11.9-bin.tar.gz
-      wget https://archive.apache.org/dist/cassandra/4.0.5/apache-cassandra-4.0.5-bin.tar.gz
       pip install -U cqlsh
     command: | 
       tar -xzf apache-cassandra-3.11.9-bin.tar.gz
