@@ -22,51 +22,53 @@
 
 <div class="step-title">Verify that the node is ready to be upgraded</div>
 
-In this step, you will look at some of the configurable properties of audit logging. Then, you will demonstrate setting and unsetting one of these properties.
+In this step, we will verify that the Cassandra 3.x cluster is ready to be upgraded. There are nine factors to consider:
 
-✅ Get the list of available audit logging properties:
+**Current State**
+All nodes in the cluster need to be in the ‘Up and Normal’ state. Check that there are no nodes in the cluster that are in a state different to *Up and Normal*. 
+
+✅ List any nodes **not** in the *UN* state:
 ```
-nodetool help enableauditlog
-```
-
-All of these properties may be configured with `nodetool` or in `cassandra.yaml`. Properties configured with `nodetool` temporarily override settings in `cassandra.yaml`. However, properties configured with `nodetool` do not persist across shutdowns. Properties configured in `cassandra.yaml` persist across server shutdowns. 
-
-In this example, you will use the `excluded-categories` property to exclude queries from the audit log. Here is the 
-list of audit log categories:
-- `QUERY`: `SELECT`
-- `DML`: (Data Manipulation Language) `UPDATE`, `DELETE`, `INSERT`, `BATCH`
-- `DDL`: (Data Definition Language) `TRUNCATE`, `CREATE_KEYSPACE`, `ALTER_KEYSPACE`, `DROP_KEYSPACE`, `CREATE_TABLE`, `DROP_TABLE`, `DROP_TRIGGER`, `CREATE_INDEX`, `DROP_INDEX`, `CREATE_TYPE`, `DROP_AGGREGATE`, `ALTER_VIEW`, `CREATE_VIEW`, `CREATE_FUNCTION`, `ALTER_TABLE`, `CREATE_AGGREGATE`, `DROP_VIEW`, `DROP_TYPE`, `DROP_FUNCTION`, `CREATE_TRIGGER`, `ALTER_TYPE`
-- `DCL`: (Data Control Language) `LIST_USERS`, `GRANT`, `REVOKE`, `DROP_ROLE`, `ALTER ROLE`, `LIST_ROLES`, `LIST_PERMISSIONS`, `CREATE_ROLE`
-- `OTHER`: `USE_KEYSPACE`
-- `AUTH`: `LOGIN_ERROR`, `UNAUTHORIZED_ATTEMPT`, `LOGIN_SUCCESS`
-- `ERROR`: `REQUEST_FAILURE`
-- `PREPARE`: `PREPARE_STATEMENT`
-
-
-✅ Execute and log a query:
-```
-nodetool enableauditlog
-
-cqlsh -k ks_audit_logging \
-      -e "SELECT * FROM songs WHERE artist = 'Elton John';"
+nodetool status | grep -v UN
 ```
 
-✅ Execute and do not log a query:
+**Disk Space**
+✅ Verify that each node has at least 50% diskspace free:
 ```
-nodetool enableauditlog --excluded-categories QUERY
-
-cqlsh -k ks_audit_logging \
-      -e "SELECT * FROM songs WHERE artist = 'Paul Simon';"
+df -h
 ```
 
-✅ Display the audit log:
+**Errors**
+✅ Ensure that there are no unresolved errors (also, see warnings) in the log:
 ```
-auditlogviewer $HOME/apache-cassandra/logs/audit/
+grep -e "WARN" -e "ERROR" cassandra3/logs/system.log
 ```
 
-You should see the query for Elton John songs but not the query for Paul Simon songs.
+**Gossip Stable**
+✅ Verify all entries in the gossip information output have the gossip state ‘STATUS:NORMAL’. Check if there are any nodes that have a status other than ‘NORMAL’:
+```
+nodetool gossipinfo | grep STATUS | grep -v NORMAL
+```
 
-In this step, you explored the configurable properties of audit logging. Next, you used `nodetool` to exclude logging queries. Then, you performed queries and used `auditlogviewer` to verify how they were logged.
+**Dropped Messages**
+✅ Establish that no Dropped Message log messages have been recorded on any node in the previous 72 hours.
+```
+nodetool tpstats | grep -A 12 Dropped
+```
+
+**Backups Disabled**
+Verify that all automatic backups have been disabled. This includes disabling *Medusa* and any scripts that call `nodetool snapshot` until the upgrade is complete.
+
+**Repair Disabled**
+Verify that *repairs* have been disabled. This includes disabling automated repairs in *Reaper*.
+
+**Monitoring**
+Upgrading may result in a temporary reduction in performance, as it simulates a series of temporary node failures. Understanding how the upgrade impacts the performance of the system, both during and after, is crucial when working through the process. 
+
+**Availability**
+Confirm that areas of the application that require strong consistency are using the `LOCAL_QUORUM` consistency level and the replication factor of 3. When `LOCAL_QUORUM` is used with a replication factor below 3, all nodes must be available for requests to succeed. A rolling restart using this configuration will result in full or partial unavailability while a node is *DOWN*.
+
+You are now ready to begin the upgrade.
 
 <!-- NAVIGATION -->
 <div id="navigation-bottom" class="navigation-bottom">
