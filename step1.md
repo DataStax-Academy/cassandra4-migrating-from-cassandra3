@@ -22,12 +22,7 @@
 
 <div class="step-title">Verify that a Cassandra 3.x node is running</div>
 
-The script running in the background is installing JDK 8 and Cassandra 3.x. It creates a *single-node* Cassandra cluster and performs the following actions:
-- Installing JDK 8
-- Installing Cassandra 3.x
-- Starting Cassandra 3.x
-
-Once *Cassandra 3.x successfully started*, execute the following commands.
+The script running in the background is installing JDK 8 and Cassandra 3.x. Once *Cassandra 3.x successfully started*, execute the following commands.
 
 ✅ Verify that the Cassandra version is 3.x:
 ```
