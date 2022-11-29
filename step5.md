@@ -22,27 +22,20 @@
 
 <div class="step-title">Install Cassandra 4.x</div>
 
-✅ In this step, you will dowanload and unpack the Cassandra 4.0.0 distribution.
+In this step, you will dowanload and unpack the Cassandra 4.0.0 distribution.
 
-Download the tarball.
-```
-wget https://archive.apache.org/dist/cassandra/4.0.0/apache-cassandra-4.0.0-bin.tar.gz
-```
 
-Extract Cassandra.
+✅ Download and install Cassandra 4.x:
 ```
-tar xzf apache-cassandra-4.0.0-bin.tar.gz
-```
+wget https://archive.apache.org/dist/cassandra/4.0.5/apache-cassandra-4.0.5-bin.tar.gz
 
-Move the Cassandra folder.
-```
-mv apache-cassandra-4.0.0 /usr/share/cassandra4
+tar -xzf apache-cassandra-4.0.5-bin.tar.gz
+
+rm apache-cassandra-4.0.5-bin.tar.gz
+
+mv apache-cassandra-4.0.5 cassandra4
 ```
 
-Delete the archive.
-```
-rm apache-cassandra-4.0.0-bin.tar.gz
-```
 
 Update the PATH variable.
 ```
