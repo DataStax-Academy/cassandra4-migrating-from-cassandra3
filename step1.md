@@ -22,39 +22,23 @@
 
 <div class="step-title">Verify that a Cassandra 3.x node is running</div>
 
-In this step, you will connect to Cassandra using `cqlsh`, and create a keyspace and table.
+The script running in the background is installing JDK 8 and Cassandra 3.x. It creates a *single-node* Cassandra cluster and performs the following actions:
+- Installing JDK 8
+- Installing Cassandra 3.x
+- Starting Cassandra 3.x
 
-✅ Start the CQL shell:
-```
-cqlsh
-```
+Once *Cassandra 3.x successfully started*, execute the following commands.
 
-✅ Create the `ks_audit_logging` keyspace:
-```
-CREATE KEYSPACE ks_audit_logging
-WITH replication = {
-  'class': 'NetworkTopologyStrategy', 
-  'DC-Houston': 1 };
 
-USE ks_audit_logging;
+✅ Verify that the Cassandra version is 3.x:
+```
+nodetool version
 ```
 
-✅ Create the `songs` table:
+✅ Verify that the Cassandra 3.x node is running:
 ```
-CREATE TABLE songs (
-   artist TEXT,
-   title TEXT,
-   year INT,
-   PRIMARY KEY ((artist), title)
-);
+nodetool status
 ```
-
-✅ Type `exit` to close `cqlsh`:
-```
-exit
-```
-
-In this step, you have created the `ks_audit_logging` keyspace and the `songs` table.
 
 <!-- NAVIGATION -->
 <div id="navigation-bottom" class="navigation-bottom">

@@ -15,11 +15,11 @@ echo ""
 
 #echo "Choose Astra DB or Cassandra on the left panel to start."
 
-echo -n 'Starting a Cassandra 3 cluster ...'; 
+echo -n 'Starting a Cassandra 3.x cluster ...'; 
 timeout 60 bash -c 'until cqlsh -e "describe cluster" >/dev/null 2>&1; do sleep 2; echo -n "."; done'; 
 sleep 2
 echo ' DONE!'
-echo "Cassandra 3 successfully started."
+echo "Cassandra 3.x successfully started."
 
 echo ""
 
