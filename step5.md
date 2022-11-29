@@ -37,14 +37,10 @@ mv apache-cassandra-4.0.5 cassandra4
 ```
 
 
-Update the PATH variable.
+✅ Update the `PATH` variable:
 ```
-export PATH="/usr/bin:/usr/share/cassandra4/bin:/usr/share/cassandra4/tools/bin:$PATH"
-```
-
-Clear the screen and continue.
-```
-clear
+export PATH="$GITPOD_REPO_ROOT/cassandra4/bin:$PATH"
+export PATH="$GITPOD_REPO_ROOT/cassandra3/tools/bin:$PATH"
 ```
 
 <!-- NAVIGATION -->
