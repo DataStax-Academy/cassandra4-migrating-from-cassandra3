@@ -28,35 +28,40 @@ In this step, we will verify that the Cassandra 3.x cluster is ready to be upgra
 
 All nodes in the cluster need to be in the ‘Up and Normal’ state. Check that there are no nodes in the cluster that are in a state different to *Up and Normal*. 
 
-✅ List any nodes not in the *UN* state:
+✅ Verify that all nodes have the `UN` state:
 ```
-nodetool status | grep -v UN
+nodetool status 
 ```
 
 **2. Disk space**
 
-✅ Verify that each node has at least 50% diskspace free:
+✅ Verify that each node has at least `50%` diskspace free:
 ```
 df -h
 ```
 
 **3. Errors**
 
-✅ Ensure that there are no unresolved errors (also, check for warnings) in the log:
+✅ Verify that there are no unresolved errors (also, check for warnings) in the log:
 ```
 grep -e "WARN" -e "ERROR" cassandra3/logs/system.log
 ```
 
 **4. Gossip stability**
 
-✅ Verify all entries in the gossip information output have the gossip state ‘STATUS:NORMAL’. Check if there are any nodes that have a status other than ‘NORMAL’:
+✅ Verify that all entries in the gossip information output have the gossip state `STATUS:NORMAL`: Check if there are any nodes that have a status other than `NORMAL`:
+```
+nodetool gossipinfo
+```
+
+✅ Check for any records that have a status other than `NORMAL`:
 ```
 nodetool gossipinfo | grep STATUS | grep -v NORMAL
 ```
 
 **5. Dropped messages**
 
-✅ Establish that no Dropped Message log messages have been recorded on any node in the previous 72 hours:
+✅ Verify that there were no dropped messages in the past `72` hours:
 ```
 nodetool tpstats | grep -A 12 Dropped
 ```
@@ -75,7 +80,9 @@ Upgrading may result in a temporary reduction in performance, as it simulates a 
 
 **9. Availability**
 
-Confirm that areas of the application that require strong consistency are using the `LOCAL_QUORUM` consistency level and the replication factor of 3. When `LOCAL_QUORUM` is used with a replication factor below 3, all nodes must be available for requests to succeed. A rolling restart using this configuration will result in full or partial unavailability while a node is *DOWN*.
+Confirm that areas of the application that require strong consistency are using the `LOCAL_QUORUM` consistency level and the replication factor of 3. 
+
+When `LOCAL_QUORUM` is used with a replication factor below 3, all replicas must be available for requests to succeed. A rolling restart using this configuration will result in full or partial unavailability while a node is *DOWN*.
 
 You are now ready to begin the upgrade.
 
