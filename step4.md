@@ -34,7 +34,7 @@ nodetool snapshot
 pgrep -u gitpod -f cassandra | xargs kill -9
 ```
 
-✅ Use `nodetool` to verify that the server has been shut down:
+✅ Use `nodetool` to verify that the node has been shut down:
 ```
 nodetool status
 ```
