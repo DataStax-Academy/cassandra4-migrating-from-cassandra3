@@ -24,15 +24,15 @@
 
 In this step, you will configure `cassandra.yaml` and start Cassandra 4.x.
 
-✅ Use `sed` to modify the number of virtual nodes in the server. The 3.x cluster had 256 and the 4.x cluster is set to 16 by default. Set `num_tokens` to 256 in Cassandra 4.x:
+✅ Change the number of virtual nodes to 256 since the 3.x node had 256 and the 4.x node is set to 16 by default. Set `num_tokens` to 256 in Cassandra 4.x:
 ```
 sed -i 's/num_tokens: 16/num_tokens: 256/' cassandra4/conf/cassandra.yaml
 ```
 
 ✅ Point the Cassandra 4.x node to the Cassandra 3.x node data files:
 ```
-sed -i 's/# data_file_directories:/data_file_directories:/' cassandra4/conf/cassandra.yaml
-sed -i 's/#     - \/var\/lib\/cassandra\/data/    - \/usr\/share\/cassandra\/data\/data/' cassandra4/conf/cassandra.yaml
+sed -i 's|# data_file_directories:|data_file_directories:|' cassandra4/conf/cassandra.yaml
+sed -i "s|#     - /var/lib/cassandra/data|    - $GITPOD_REPO_ROOT/cassandra3/data/data|" cassandra4/conf/cassandra.yaml
 ```
 
 ✅ Start the Cassandra 4.x node:
