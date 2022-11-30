@@ -24,7 +24,7 @@
 
 In this step, we will verify that the Cassandra 3.x cluster is ready to be upgraded. There are nine factors to consider:
 
-**Current State**
+**1. Current state**
 
 All nodes in the cluster need to be in the ‘Up and Normal’ state. Check that there are no nodes in the cluster that are in a state different to *Up and Normal*. 
 
@@ -33,46 +33,47 @@ All nodes in the cluster need to be in the ‘Up and Normal’ state. Check that
 nodetool status | grep -v UN
 ```
 
-**Disk Space**
+**2. Disk space**
+
 ✅ Verify that each node has at least 50% diskspace free:
 ```
 df -h
 ```
 
-**Errors**
+**3. Errors**
 
-✅ Ensure that there are no unresolved errors (also, see warnings) in the log:
+✅ Ensure that there are no unresolved errors (also, check for warnings) in the log:
 ```
 grep -e "WARN" -e "ERROR" cassandra3/logs/system.log
 ```
 
-**Gossip Stable**
+**4. Gossip stability**
 
 ✅ Verify all entries in the gossip information output have the gossip state ‘STATUS:NORMAL’. Check if there are any nodes that have a status other than ‘NORMAL’:
 ```
 nodetool gossipinfo | grep STATUS | grep -v NORMAL
 ```
 
-**Dropped Messages**
+**5. Dropped messages**
 
 ✅ Establish that no Dropped Message log messages have been recorded on any node in the previous 72 hours:
 ```
 nodetool tpstats | grep -A 12 Dropped
 ```
 
-**Backups Disabled**
+**6. Backup disabled**
 
 Verify that all automatic backups have been disabled. This includes disabling *Medusa* and any scripts that call `nodetool snapshot` until the upgrade is complete.
 
-**Repair Disabled**
+**7. Repair disabled**
 
 Verify that *repairs* have been disabled. This includes disabling automated repairs in *Reaper*.
 
-**Monitoring**
+**8. Monitoring**
 
 Upgrading may result in a temporary reduction in performance, as it simulates a series of temporary node failures. Understanding how the upgrade impacts the performance of the system, both during and after, is crucial when working through the process. 
 
-**Availability**
+**9. Availability**
 
 Confirm that areas of the application that require strong consistency are using the `LOCAL_QUORUM` consistency level and the replication factor of 3. When `LOCAL_QUORUM` is used with a replication factor below 3, all nodes must be available for requests to succeed. A rolling restart using this configuration will result in full or partial unavailability while a node is *DOWN*.
 
