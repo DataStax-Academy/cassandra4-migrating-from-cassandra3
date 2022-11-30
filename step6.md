@@ -40,7 +40,7 @@ sed -i "s|#     - /var/lib/cassandra/data|    - $GITPOD_REPO_ROOT/cassandra3/dat
 cassandra
 ```
 
-Look for the *state jump to NORMAL* message to indicate that the node is running.
+Look for the `state jump to NORMAL` message to indicate that the node is running.
 
 ✅ Clear the screen and continue:
 ```
